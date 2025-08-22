@@ -208,24 +208,3 @@ Tree > .tree--label {
 Tree > .tree--label:hover {
     background: $surface-lighten-1;
 }
-
-/* Responsive Design */
-@media (max-width: 80) {
-    #nav-panel {
-        width: 30%;
-    }
-
-    #content-area {
-        width: 70%;
-    }
-}
-
-@media (max-width: 60) {
-    #nav-panel {
-        width: 35%;
-    }
-
-    #content-area {
-        width: 65%;
-    }
-}
