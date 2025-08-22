@@ -17,7 +17,7 @@ from views import SystemInfoView, FileManagerView, ProcessMonitorView, NetworkTo
 
 class NavigationPanel(Static):
     """Left navigation panel with menu items"""
-    
+
     def compose(self) -> ComposeResult:
         yield Label("Navigation", classes="section-title")
         yield Button("System Info", id="btn-system", classes="nav-button")
@@ -29,12 +29,12 @@ class NavigationPanel(Static):
 
 class ContentArea(Static):
     """Main content area that changes based on navigation"""
-    
+
     current_view = reactive("system")
-    
+
     def compose(self) -> ComposeResult:
         yield SystemInfoView(id="system-view")
-    
+
     def on_button_pressed(self, event: Button.Pressed) -> None:
         """Handle navigation button clicks"""
         button_id = event.button.id
@@ -48,15 +48,15 @@ class ContentArea(Static):
             self.show_view("network")
         elif button_id == "btn-settings":
             self.show_view("settings")
-    
+
     def show_view(self, view_name: str) -> None:
         """Show the specified view"""
         self.current_view = view_name
-        
+
         # Remove all existing views
         for child in self.children:
             child.remove()
-        
+
         # Add the selected view
         if view_name == "system":
             self.mount(SystemInfoView(id="system-view"))
@@ -72,7 +72,7 @@ class ContentArea(Static):
 
 class PythonTUIApp(App):
     """Main TUI application class"""
-    
+
     CSS_PATH = "styles.css"
     BINDINGS = [
         Binding("q", "quit", "Quit"),
@@ -83,52 +83,52 @@ class PythonTUIApp(App):
         Binding("4", "view_network", "Network"),
         Binding("5", "view_settings", "Settings"),
     ]
-    
+
     def compose(self) -> ComposeResult:
         """Compose the main application layout"""
         yield Header(show_clock=True)
-        
+
         with Container(id="main-container"):
             with Horizontal(id="app-layout"):
                 yield NavigationPanel(id="nav-panel")
                 yield ContentArea(id="content-area")
-        
+
         yield Footer()
-    
+
     def on_mount(self) -> None:
         """Called when the app is mounted"""
         self.title = "Python TUI - linutil-inspired Template"
         self.sub_title = "Modern Text-Based User Interface"
-    
+
     def action_quit(self) -> None:
         """Quit the application"""
         self.exit()
-    
+
     def action_show_help(self) -> None:
         """Show help information"""
         # Implementation for help display
         pass
-    
+
     def action_view_system(self) -> None:
         """Switch to system view"""
         content_area = self.query_one("#content-area")
         content_area.show_view("system")
-    
+
     def action_view_files(self) -> None:
         """Switch to files view"""
         content_area = self.query_one("#content-area")
         content_area.show_view("files")
-    
+
     def action_view_processes(self) -> None:
         """Switch to processes view"""
         content_area = self.query_one("#content-area")
         content_area.show_view("processes")
-    
+
     def action_view_network(self) -> None:
         """Switch to network view"""
         content_area = self.query_one("#content-area")
         content_area.show_view("network")
-    
+
     def action_view_settings(self) -> None:
         """Switch to settings view"""
         content_area = self.query_one("#content-area")

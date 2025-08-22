@@ -14,24 +14,24 @@ from pathlib import Path
 
 class SystemInfoView(Static):
     """System information view showing OS details, memory, CPU, etc."""
-    
+
     def compose(self):
         yield Label("System Information", classes="section-title")
-        
+
         # System details
         yield Label("Operating System", classes="subsection-title")
         yield Label(f"OS: {os.name}", classes="info-text")
         yield Label(f"Platform: {os.uname().sysname}", classes="info-text")
         yield Label(f"Release: {os.uname().release}", classes="info-text")
         yield Label(f"Machine: {os.uname().machine}", classes="info-text")
-        
+
         # Memory information
         yield Label("Memory Usage", classes="subsection-title")
         memory = psutil.virtual_memory()
         yield Label(f"Total: {memory.total // (1024**3):.1f} GB", classes="info-text")
         yield Label(f"Available: {memory.available // (1024**3):.1f} GB", classes="info-text")
         yield Label(f"Used: {memory.percent:.1f}%", classes="info-text")
-        
+
         # CPU information
         yield Label("CPU Information", classes="subsection-title")
         yield Label(f"CPU Count: {psutil.cpu_count()}", classes="info-text")
@@ -40,26 +40,26 @@ class SystemInfoView(Static):
 
 class FileManagerView(Static):
     """File manager view showing directory structure and files"""
-    
+
     current_path = reactive(str(Path.home()))
-    
+
     def compose(self):
         yield Label("File Manager", classes="section-title")
-        
+
         # Path display
         with Horizontal():
             yield Label("Current Path:", classes="label")
             yield Label(self.current_path, classes="path-text")
-        
+
         # Navigation buttons
         with Horizontal():
             yield Button("Home", id="btn-home", classes="action-button")
             yield Button("Parent", id="btn-parent", classes="action-button")
             yield Button("Refresh", id="btn-refresh", classes="action-button")
-        
+
         # File tree
         yield self.create_file_tree()
-    
+
     def create_file_tree(self):
         """Create a tree view of the current directory"""
         tree = Tree("Files", id="file-tree")
@@ -74,7 +74,7 @@ class FileManagerView(Static):
         except PermissionError:
             tree.root.add("Permission denied", data="")
         return tree
-    
+
     def on_button_pressed(self, event):
         """Handle file manager button clicks"""
         button_id = event.button.id
@@ -86,9 +86,9 @@ class FileManagerView(Static):
                 self.current_path = str(parent)
         elif button_id == "btn-refresh":
             pass  # Refresh the file tree
-        
+
         self.update_file_tree()
-    
+
     def update_file_tree(self):
         """Update the file tree display"""
         # Implementation for updating the file tree
@@ -97,19 +97,19 @@ class FileManagerView(Static):
 
 class ProcessMonitorView(Static):
     """Process monitor view showing running processes"""
-    
+
     def compose(self):
         yield Label("Process Monitor", classes="section-title")
-        
+
         # Process table
         table = DataTable(id="process-table")
         table.add_columns("PID", "Name", "CPU %", "Memory %", "Status")
-        
+
         # Populate with process data
         self.populate_process_table(table)
-        
+
         yield table
-    
+
     def populate_process_table(self, table):
         """Populate the process table with current process data"""
         try:
@@ -131,10 +131,10 @@ class ProcessMonitorView(Static):
 
 class NetworkToolsView(Static):
     """Network tools view showing network interfaces and connections"""
-    
+
     def compose(self):
         yield Label("Network Tools", classes="section-title")
-        
+
         # Network interfaces
         yield Label("Network Interfaces", classes="subsection-title")
         interfaces = psutil.net_if_addrs()
@@ -142,7 +142,7 @@ class NetworkToolsView(Static):
             yield Label(f"Interface: {interface}", classes="info-text")
             for addr in addrs:
                 yield Label(f"  {addr.family.name}: {addr.address}", classes="info-text")
-        
+
         # Network connections
         yield Label("Active Connections", classes="subsection-title")
         try:
@@ -159,26 +159,26 @@ class NetworkToolsView(Static):
 
 class SettingsView(Static):
     """Settings view for application configuration"""
-    
+
     def compose(self):
         yield Label("Settings", classes="section-title")
-        
+
         # Theme selection
         yield Label("Theme", classes="subsection-title")
         with Horizontal():
             yield Button("Light", id="btn-light", classes="theme-button")
             yield Button("Dark", id="btn-dark", classes="theme-button")
             yield Button("Auto", id="btn-auto", classes="theme-button")
-        
+
         # Display options
         yield Label("Display Options", classes="subsection-title")
         yield Label("Show clock in header: Yes", classes="info-text")
         yield Label("Auto-refresh interval: 5s", classes="info-text")
         yield Label("Enable animations: Yes", classes="info-text")
-        
+
         # Save button
         yield Button("Save Settings", id="btn-save", classes="action-button")
-    
+
     def on_button_pressed(self, event):
         """Handle settings button clicks"""
         button_id = event.button.id
