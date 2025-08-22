@@ -1,0 +1,231 @@
+/* Python TUI Template - Modern Styling */
+
+/* Global App Styling */
+Screen {
+    background: $surface;
+    color: $text;
+}
+
+/* Header Styling */
+Header {
+    background: $primary;
+    color: $text;
+    text-align: center;
+    height: 3;
+    border-bottom: solid $primary-lighten-2;
+}
+
+Header .title {
+    color: $text;
+    text-style: bold;
+}
+
+Header .subtitle {
+    color: $text-muted;
+}
+
+/* Footer Styling */
+Footer {
+    background: $primary;
+    color: $text;
+    height: 1;
+    border-top: solid $primary-lighten-2;
+}
+
+/* Main Container */
+#main-container {
+    height: 100%;
+    background: $surface;
+}
+
+/* App Layout */
+#app-layout {
+    height: 100%;
+    background: $surface;
+}
+
+/* Navigation Panel */
+#nav-panel {
+    width: 25%;
+    background: $surface-darken-1;
+    border-right: solid $primary-lighten-2;
+    padding: 1;
+}
+
+#nav-panel .section-title {
+    color: $primary;
+    text-style: bold;
+    margin-bottom: 1;
+    text-align: center;
+}
+
+.nav-button {
+    width: 100%;
+    margin: 1 0;
+    background: $surface;
+    border: solid $primary-lighten-2;
+    color: $text;
+}
+
+.nav-button:hover {
+    background: $primary-lighten-2;
+    color: $text;
+}
+
+.nav-button:focus {
+    background: $primary;
+    color: $text;
+}
+
+/* Content Area */
+#content-area {
+    width: 75%;
+    background: $surface;
+    padding: 2;
+}
+
+.section-title {
+    color: $primary;
+    text-style: bold;
+    margin-bottom: 1;
+    text-align: center;
+}
+
+.subsection-title {
+    color: $primary-lighten-1;
+    text-style: bold;
+    margin: 1 0 0.5 0;
+    padding-left: 1;
+    border-left: solid $primary-lighten-2;
+}
+
+.info-text {
+    color: $text;
+    margin: 0.5 0;
+    padding: 0.5;
+    background: $surface-lighten-1;
+    border-left: solid $primary;
+}
+
+.path-text {
+    color: $accent;
+    text-style: bold;
+    margin: 0.5 0;
+    padding: 0.5;
+    background: $surface-lighten-1;
+    border: solid $accent;
+}
+
+.label {
+    color: $text-muted;
+    margin-right: 1;
+}
+
+/* Button Styling */
+Button {
+    background: $primary;
+    color: $text;
+    border: solid $primary-lighten-2;
+    padding: 0 1;
+}
+
+Button:hover {
+    background: $primary-lighten-1;
+    color: $text;
+}
+
+Button:focus {
+    background: $primary-lighten-2;
+    color: $text;
+    border: solid $accent;
+}
+
+.action-button {
+    background: $accent;
+    color: $text;
+    border: solid $accent-lighten-2;
+    margin: 0.5;
+}
+
+.action-button:hover {
+    background: $accent-lighten-1;
+    color: $text;
+}
+
+.theme-button {
+    background: $surface;
+    color: $text;
+    border: solid $primary-lighten-2;
+    margin: 0.5;
+}
+
+.theme-button:hover {
+    background: $primary-lighten-2;
+    color: $text;
+}
+
+/* Label Styling */
+Label {
+    color: $text;
+}
+
+/* Container Styling */
+Container {
+    background: $surface;
+}
+
+/* Data Table Styling */
+DataTable {
+    background: $surface;
+    border: solid $primary-lighten-2;
+}
+
+DataTable > .datatable--header {
+    background: $primary;
+    color: $text;
+    text-style: bold;
+}
+
+DataTable > .datatable--row {
+    background: $surface;
+    color: $text;
+}
+
+DataTable > .datatable--row:hover {
+    background: $surface-lighten-1;
+}
+
+/* Tree Styling */
+Tree {
+    background: $surface;
+    border: solid $primary-lighten-2;
+}
+
+Tree > .tree--label {
+    color: $text;
+}
+
+Tree > .tree--label:hover {
+    background: $surface-lighten-1;
+}
+
+/* Responsive Design */
+@media (max-width: 80) {
+    #nav-panel {
+        width: 30%;
+    }
+    
+    #content-area {
+        width: 70%;
+    }
+}
+
+@media (max-width: 60) {
+    #nav-panel {
+        width: 35%;
+    }
+    
+    #content-area {
+        width: 65%;
+    }
+}
