@@ -84,6 +84,13 @@ Footer {
     padding: 2;
 }
 
+/* Scrollable Container Styling */
+ScrollableContainer {
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* Section Titles */
 .section-title {
     color: $primary;
     text-style: bold;

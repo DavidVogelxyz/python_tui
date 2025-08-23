@@ -6,7 +6,7 @@ A modern text-based user interface built with textual framework
 
 import asyncio
 from textual.app import App, ComposeResult
-from textual.containers import Container, Horizontal, Vertical
+from textual.containers import Container, Horizontal, Vertical, ScrollableContainer
 from textual.widgets import Header, Footer, Button, Static, DataTable, Tree, Label
 from textual.widgets.tree import TreeNode
 from textual.reactive import reactive
@@ -27,10 +27,11 @@ class NavigationPanel(Static):
         yield Button("Settings", id="btn-settings", classes="nav-button")
 
 
-class ContentArea(Static):
+class ContentArea(ScrollableContainer):
     """Main content area that changes based on navigation"""
 
     current_view = reactive("system")
+    is_switching = False
 
     def compose(self) -> ComposeResult:
         yield SystemInfoView(id="system-view")
@@ -51,23 +52,35 @@ class ContentArea(Static):
 
     def show_view(self, view_name: str) -> None:
         """Show the specified view"""
+        # Prevent duplicate view switching
+        if self.current_view == view_name or self.is_switching:
+            return
+
+        self.is_switching = True
         self.current_view = view_name
 
         # Remove all existing views
-        for child in self.children:
+        for child in list(self.children):
             child.remove()
 
-        # Add the selected view
+        # Add the selected view with a unique ID
         if view_name == "system":
-            self.mount(SystemInfoView(id="system-view"))
+            self.mount(SystemInfoView(id=f"system-view-{id(self)}"))
         elif view_name == "files":
-            self.mount(FileManagerView(id="files-view"))
+            self.mount(FileManagerView(id=f"files-view-{id(self)}"))
         elif view_name == "processes":
-            self.mount(ProcessMonitorView(id="processes-view"))
+            self.mount(ProcessMonitorView(id=f"processes-view-{id(self)}"))
         elif view_name == "network":
-            self.mount(NetworkToolsView(id="network-view"))
+            self.mount(NetworkToolsView(id=f"network-view-{id(self)}"))
         elif view_name == "settings":
-            self.mount(SettingsView(id="settings-view"))
+            self.mount(SettingsView(id=f"settings-view-{id(self)}"))
+
+        # Reset switching flag after a short delay
+        self.call_after_refresh(self._reset_switching_flag)
+
+    def _reset_switching_flag(self):
+        """Reset the switching flag after view change"""
+        self.is_switching = False
 
 
 class PythonTUIApp(App):
