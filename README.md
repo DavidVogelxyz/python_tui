@@ -1,6 +1,6 @@
-# Python TUI Template - linutil-inspired
+# Python TUI Template
 
-A modern, interactive text-based user interface (TUI) built with Python and the `textual` framework. This template provides a solid foundation for creating TUIs that mirror the look and feel of the `linutil` project.
+A modern, interactive text-based user interface (TUI) built with Python and the `textual` framework.
 
 ## Features
 
@@ -161,7 +161,8 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
-- Inspired by the `linutil` project's TUI design
+- Inspired by the `ChrisTitusTech/linutil` project's TUI design
+- Worked with Cursor and its AI agent
 - Built with the excellent `textual` framework
 - Uses `psutil` for system monitoring capabilities
 

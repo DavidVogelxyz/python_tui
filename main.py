@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Python TUI Template - Inspired by linutil
+Python TUI Template
 A modern text-based user interface built with textual framework
 """
 
@@ -115,7 +115,7 @@ class PythonTUIApp(App):
 
     def on_mount(self) -> None:
         """Called when the app is mounted"""
-        self.title = "Python TUI - linutil-inspired Template"
+        self.title = "Python TUI Template"
         self.sub_title = "Modern Text-Based User Interface"
 
     def action_quit(self) -> None:
