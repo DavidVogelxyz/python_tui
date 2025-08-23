@@ -26,6 +26,25 @@ class NavigationPanel(Static):
         yield Button("Network Tools", id="btn-network", classes="nav-button")
         yield Button("Settings", id="btn-settings", classes="nav-button")
 
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        """Handle navigation button clicks"""
+        button_id = event.button.id
+        # Get the parent app to access the content area
+        app = self.app
+        if app:
+            content_area = app.query_one("#content-area")
+            if content_area:
+                if button_id == "btn-system":
+                    content_area.show_view("system")
+                elif button_id == "btn-files":
+                    content_area.show_view("files")
+                elif button_id == "btn-processes":
+                    content_area.show_view("processes")
+                elif button_id == "btn-network":
+                    content_area.show_view("network")
+                elif button_id == "btn-settings":
+                    content_area.show_view("settings")
+
 
 class ContentArea(ScrollableContainer):
     """Main content area that changes based on navigation"""
@@ -35,20 +54,6 @@ class ContentArea(ScrollableContainer):
 
     def compose(self) -> ComposeResult:
         yield SystemInfoView(id="system-view")
-
-    def on_button_pressed(self, event: Button.Pressed) -> None:
-        """Handle navigation button clicks"""
-        button_id = event.button.id
-        if button_id == "btn-system":
-            self.show_view("system")
-        elif button_id == "btn-files":
-            self.show_view("files")
-        elif button_id == "btn-processes":
-            self.show_view("processes")
-        elif button_id == "btn-network":
-            self.show_view("network")
-        elif button_id == "btn-settings":
-            self.show_view("settings")
 
     def show_view(self, view_name: str) -> None:
         """Show the specified view"""
