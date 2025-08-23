@@ -4,7 +4,7 @@ Contains different content views that can be displayed in the main content area
 """
 
 from textual.widgets import Static, Label, DataTable, Tree, Button, Input
-from textual.containers import Vertical, Horizontal, ScrollableContainer
+from textual.containers import Vertical, Horizontal
 from textual.reactive import reactive
 from textual import work
 import psutil
@@ -12,7 +12,7 @@ import os
 from pathlib import Path
 
 
-class SystemInfoView(ScrollableContainer):
+class SystemInfoView(Static):
     """System information view showing OS details, memory, CPU, etc."""
 
     def compose(self):
@@ -54,7 +54,7 @@ class SystemInfoView(ScrollableContainer):
         yield Label(f"Current Working Directory: {os.getcwd()}", classes="info-text")
 
 
-class FileManagerView(ScrollableContainer):
+class FileManagerView(Static):
     """File manager view showing directory structure and files"""
 
     current_path = reactive(str(Path.home()))
@@ -111,7 +111,7 @@ class FileManagerView(ScrollableContainer):
         pass
 
 
-class ProcessMonitorView(ScrollableContainer):
+class ProcessMonitorView(Static):
     """Process monitor view showing running processes"""
 
     def compose(self):
@@ -145,7 +145,7 @@ class ProcessMonitorView(ScrollableContainer):
             table.add_row("Error", str(e), "", "", "")
 
 
-class NetworkToolsView(ScrollableContainer):
+class NetworkToolsView(Static):
     """Network tools view showing network interfaces and connections"""
 
     def compose(self):
@@ -173,7 +173,7 @@ class NetworkToolsView(ScrollableContainer):
             yield Label(f"Error getting connections: {e}", classes="info-text")
 
 
-class SettingsView(ScrollableContainer):
+class SettingsView(Static):
     """Settings view for application configuration"""
 
     def compose(self):
