@@ -2,6 +2,8 @@
 
 A modern, interactive text-based user interface (TUI) built with Python and the `textual` framework.
 
+![Python TUI GIF](/docs/example.gif)
+
 ## Features
 
 - **Modern TUI Framework**: Built with `textual`, a powerful Python library for creating interactive text interfaces
